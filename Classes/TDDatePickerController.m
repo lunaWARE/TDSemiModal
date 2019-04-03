@@ -20,6 +20,17 @@
 	for (UIView* subview in self.datePicker.subviews) {
 		subview.frame = self.datePicker.bounds;
 	}
+	self.datePicker.backgroundColor=[UIColor whiteColor];
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCoverView)];
+    tap.numberOfTapsRequired=1;
+    tap.numberOfTouchesRequired=1;
+    [self.view setUserInteractionEnabled:YES];
+    [self.view addGestureRecognizer:tap];
+}
+-(void)tapCoverView{
+    if([self.delegate respondsToSelector:@selector(datePickerCancel:)]) {
+        [self.delegate datePickerCancel:self];
+    }
 }
 
 -(BOOL)shouldAutorotate
